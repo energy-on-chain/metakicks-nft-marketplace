@@ -83255,10 +83255,16 @@
       "links": {},
       "address": "0x8EE19CF08e031E5e7Ba5cA694cD336d005D58DCF",
       "transactionHash": "0x41256af5227a2807711cf1906336b2723fb75ba076bf44f1640307ba8201e7f2"
+    },
+    "80001": {
+      "events": {},
+      "links": {},
+      "address": "0x3769966B2B98915ca50fc3C7C861edB2636a8A47",
+      "transactionHash": "0x8b83a34faa88bdd2f8bb544dfc6c41bb930bba2a34b026872292d048c11579de"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-07-11T23:08:18.077Z",
+  "updatedAt": "2022-07-11T23:37:56.642Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
