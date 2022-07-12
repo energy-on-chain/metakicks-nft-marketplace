@@ -4,7 +4,7 @@ import Countdown from 'react-countdown'
 import Web3 from 'web3'
 
 // Import Components
-import Navbar from './Navbar.js'
+import Header from './Header.js'
 
 // Import Images + CSS
 import hbdLogo from '../images/hbd-logo.jpg'
@@ -149,11 +149,11 @@ function App() {
 
 	return (
 		<div>
-			<Navbar account={account} web3Handler={web3Handler} />
+			<Header account={account} web3Handler={web3Handler} />
 			<main>
 				<Row className="my-3">
 					<Col className="text-center">
-						<h1 className="text-uppercase">Open Emojis</h1>
+						<h1 className="text-uppercase">Metakicks NFT Project</h1>
 						<p className="countdown">
 							{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} />}
 						</p>
