@@ -3,7 +3,12 @@ import { Row, Col } from 'react-bootstrap'
 import Countdown from 'react-countdown'
 import Web3 from 'web3'
 
+// Import Components
+import Navbar from './Navbar.js'
+
 // Import Images + CSS
+import hbdLogo from '../images/hbd-logo.jpg'
+import eocLogo from '../images/eoc-logo.jpg'
 import logo from '../images/logo.png'
 import happyImage from '../images/happy.png'
 import excitedImage from '../images/excited.png'
@@ -144,29 +149,7 @@ function App() {
 
 	return (
 		<div>
-			<nav className="navbar fixed-top mx-3">
-				<a
-					className="navbar-brand col-sm-3 col-md-2 mr-0 mx-4"
-					href="http://www.dappuniversity.com/bootcamp"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<img src={logo} className="App-logo" alt="logo" />
-					Dapp University
-				</a>
-
-				{account ? (
-					<a
-						href={`https://etherscan.io/address/${account}`}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="button nav-button btn-sm mx-4">
-						{account.slice(0, 5) + '...' + account.slice(38, 42)}
-					</a>
-				) : (
-					<button onClick={web3Handler} className="button nav-button btn-sm mx-4">Connect Wallet</button>
-				)}
-			</nav>
+			<Navbar account={account} web3Handler={web3Handler} />
 			<main>
 				<Row className="my-3">
 					<Col className="text-center">
