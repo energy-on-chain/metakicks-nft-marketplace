@@ -3,7 +3,10 @@ import { Row, Col } from 'react-bootstrap'
 import Countdown from 'react-countdown'
 import Web3 from 'web3'
 
-// Import Components
+// Import React Components
+import Alert from 'react-bootstrap/Alert';
+
+// Import App Components
 import Header from './Header.js'
 import Footer from './Footer.js'
 
@@ -17,6 +20,7 @@ import './App.css'
 // Import ABI + Config
 import OpenEmoji from '../abis/OpenEmoji.json';
 import CONFIG from '../config.json';
+import { NODE_PARENT_VALIDATIONS } from '@babel/types';
 
 function App() {
 	const [web3, setWeb3] = useState(null)
@@ -37,6 +41,8 @@ function App() {
 
 	const [currentTime, setCurrentTime] = useState(new Date().getTime())
 	const [revealTime, setRevealTime] = useState(0)
+
+	const [showAlert, setShowAlert] = useState('')    // for alerts
 
 	const loadBlockchainData = async () => {
 		console.log('Running loadBlockchainData...')
@@ -117,13 +123,14 @@ function App() {
 
 	const mintNFTHandler = async () => {
 		if (revealTime > new Date().getTime()) {
-			window.alert('Minting is not live yet!')
+			// window.alert('Minting is not live yet!')  FIXME: option to add this functionality later
 			return
 		}
 
 		if (balanceOf > 0) {
-			window.alert('You\'ve already minted!')
-			return
+			// window.alert('You have already minted the max amount!');
+			setShowAlert("minting")
+			return 
 		}
 
 		// Mint NFT
@@ -141,7 +148,8 @@ function App() {
 					setBalanceOf(balanceOf)
 				})
 				.on('error', (error) => {
-					window.alert(error)
+					// window.alert(error)
+					setShowAlert("error")
 					setIsError(true)
 				})
 		}
@@ -159,6 +167,23 @@ function App() {
 		<div>
 			<Header account={account} web3Handler={web3Handler} />
 			<main>
+				<Row className="my-3">
+					<Col>
+						{ (showAlert == "error") ? <Alert variant="danger" dismissible >Error during minting! Please refresh page and retry.</Alert> : ((showAlert=="warning") ? <Alert variant="warning" dismissible >Warning</Alert> : ((showAlert=="success") ? <Alert variant="success" dismissible >You successfully minted a pair of Metakicks!</Alert> : ((showAlert=="minting") ? <Alert variant="primary" dismissible >Currently minting your Metakicks...</Alert> : <p></p> )))}
+						{/* <Alert variant="danger">
+							<Alert.Heading>An error occurred during minting, please refresh page and retry.</Alert.Heading>
+						</Alert>
+						<Alert variant="primary">
+							<Alert.Heading>Minting your Metakicks now...</Alert.Heading>
+						</Alert>
+						<Alert variant="warning">
+							<Alert.Heading>You've already minted the max number of Metakicks per customer!</Alert.Heading>
+						</Alert>
+						<Alert variant="success">
+							<Alert.Heading>Congrats, you just minted some new Metakicks!</Alert.Heading>
+						</Alert> */}
+					</Col>
+				</Row>
 				<Row className="my-3">
 					<Col className="text-center">
 						<h1 className="text-uppercase">Metakicks NFT Project</h1>
@@ -228,23 +253,22 @@ export default App;
 // QA all links
 // host on our domain
 //
-// MINT:
-// add footer (with all logos)
-// add alerts (minting..., already maxed out, etc.)
+// MINT PAGE:
+// add alerts (currently minting, error during minting, success during minting, max nfts minted, you can only mint five nfts)
 // css styling update
-// update smart contract details that are displayed on the page (e.g. minting price, nft count)
 // add all metackicks to the ipfs (and update project / site accordingly) 
 //
-// HOME:
+// HOME PAGE:
 // add helpful links: https://wallet.polygon.technology/
 // add rounded gifs
 // add testimonial vid
 //
-// RAFFLE:
-//
-// NICE TO HAVE:
+// NICE TO HAVE ADDITONS:
+// raffle page with restricted access for customers
 // fix countdown timer
-// add delayed reveal feature
+// add delayed reveal feature for the nfts themselves
 // separate main contract file out into multiple simpler contracts
+// separate all components out of App.js to make it more modular
+// update names of all contracts
 //
 

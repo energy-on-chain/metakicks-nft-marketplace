@@ -1,11 +1,11 @@
 /* Styles go here */
 /* Styles go here */
-@import url('https://fonts.googleapis.com/css2?family=Gluten:wght@400;700&family=Rubik:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gluten:wght@400;700&family=Arial:wght@400;700&display=swap');
 
 :root {
-    --clr-prussian-blue: #003853;
-    --clr-orient: #006178;
-    --clr-malibu: #92D3F5;
+    --clr-prussian-blue: #2D3032;
+    --clr-orient: #9615DB;
+    --clr-malibu: #D2D3D3;
 
     --clr-golden-fizz: #FCEA2B;
 
@@ -13,7 +13,7 @@
 }
 
 html {
-    font-family: "Rubik" !important;
+    font-family: "Arial" !important;
     font-weight: 400;
 }
 
@@ -24,7 +24,7 @@ body {
 
     min-height: 100vh;
 
-    font-family: "Rubik";
+    font-family: "Arial";
 }
 
 .flex {
@@ -57,7 +57,7 @@ main {
 
 /* TEXT STYLES */
 h1 {
-    font-family: "Rubik";
+    font-family: "Arial";
     font-weight: 700;
     font-size: 3rem;
 }

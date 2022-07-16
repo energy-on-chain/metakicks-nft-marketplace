@@ -1416,8 +1416,8 @@ contract OpenEmoji is ERC721Enumerable, Ownable {
     string baseURI;
     string public baseExtension = ".json";
     uint256 public cost = 0 ether;
-    uint256 public maxSupply = 138;
-    uint256 public maxMintAmount = 1;
+    uint256 public maxSupply = 4;
+    uint256 public maxMintAmount = 5;
     uint256 public timeDeployed;
     uint256 public allowMintingAfter = 0;
     bool public isPaused = false;
@@ -1452,7 +1452,7 @@ contract OpenEmoji is ERC721Enumerable, Ownable {
             "Minting now allowed yet"
         );
 
-        require(balanceOf(msg.sender) == 0, "Only 1 mint per account");
+        require(balanceOf(msg.sender) < 5, "Only 5 mints per account");
 
         uint256 supply = totalSupply();
         require(!isPaused);
