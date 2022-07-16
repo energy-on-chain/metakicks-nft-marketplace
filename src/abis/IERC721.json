@@ -60313,7 +60313,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-07-11T22:58:17.147Z",
+  "updatedAt": "2022-07-16T12:42:03.181Z",
   "devdoc": {
     "details": "Required interface of an ERC721 compliant contract.",
     "events": {

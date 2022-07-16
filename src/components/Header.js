@@ -32,7 +32,3 @@ const Header = (props) => {
 
 export default Header;
 
-
-// TODO
-// Add metkicks logo
-// Fix links to home, mint, raffle

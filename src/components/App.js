@@ -5,14 +5,13 @@ import Web3 from 'web3'
 
 // Import Components
 import Header from './Header.js'
+import Footer from './Footer.js'
 
 // Import Images + CSS
 import hbdLogo from '../images/hbd-logo.jpg'
 import eocLogo from '../images/eoc-logo.jpg'
 import logo from '../images/logo.png'
-import happyImage from '../images/happy.png'
-import excitedImage from '../images/excited.png'
-import sadImage from '../images/sad.png'
+import metakickImage from '../images/metakick0.PNG'
 import './App.css'
 
 // Import ABI + Config
@@ -40,6 +39,8 @@ function App() {
 	const [revealTime, setRevealTime] = useState(0)
 
 	const loadBlockchainData = async () => {
+		console.log('Running loadBlockchainData...')
+
 		// Fetch Contract, Data, etc.
 		if (web3) {
 			const networkId = await web3.eth.net.getId()
@@ -58,6 +59,11 @@ function App() {
 
 				const allowMintingAfter = await openEmoji.methods.allowMintingAfter().call()
 				const timeDeployed = await openEmoji.methods.timeDeployed().call()
+				// FIXME
+				console.log("Allow minting after", allowMintingAfter)
+				console.log("Time deployed:", timeDeployed)
+				console.log("Reveal time:", revealTime)
+				console.log("Current time:", currentTime)
 				setRevealTime((Number(timeDeployed) + Number(allowMintingAfter)).toString() + '000')
 
 				if (networkId !== 5777) {
@@ -67,13 +73,14 @@ function App() {
 
 			} catch (error) {
 				setIsError(true)
-				setMessage("Contract not deployed to current network, please change network in MetaMask")
+				setMessage("Contract not deployed to current network, please change network to Polygon in MetaMask")
 			}
 
 		}
 	}
 
 	const loadWeb3 = async () => {
+		console.log('Running loadWeb3...')
 		if (typeof window.ethereum !== 'undefined' && !account) {
 			const web3 = new Web3(window.ethereum)
 			setWeb3(web3)
@@ -143,6 +150,7 @@ function App() {
 	};
 
 	useEffect(() => {
+		console.log('useEffect has been triggered...')
 		loadWeb3()
 		loadBlockchainData()
 	}, [account]);
@@ -154,10 +162,11 @@ function App() {
 				<Row className="my-3">
 					<Col className="text-center">
 						<h1 className="text-uppercase">Metakicks NFT Project</h1>
-						<p className="countdown">
+						{/* <p className="countdown">
 							{revealTime !== 0 && <Countdown date={currentTime + (revealTime - currentTime)} />}
-						</p>
-						<p>Welcome! Mint your free emoji (not including gas fees) on 11/04/21</p>
+						</p> */}
+						<p>Welcome to Metakicks NFT Project on Polygon!</p>
+						<p>Mint your free pair of Metakicks (not including gas fees) starting on 23 July, 2022.</p>
 					</Col>
 				</Row>
 				<Row className="my-4">
@@ -167,11 +176,11 @@ function App() {
 					<Col className="panel grid image-showcase mx-4">
 						<img
 							src={isError ? (
-								sadImage
+								metakickImage
 							) : !isError && isMinting ? (
-								excitedImage
+								metakickImage
 							) : (
-								happyImage
+								metakickImage
 							)}
 							alt="emoji-smile"
 							className="image-showcase-example-1"
@@ -181,7 +190,7 @@ function App() {
 				<Row className="my-3">
 					<Col className="flex">
 						<a href={openseaURL + account} target="_blank" rel="noreferrer" className="button">View My Opensea</a>
-						<a href={`${blockchainExplorerURL}address/${account}`} target="_blank" rel="noreferrer" className="button">My Etherscan</a>
+						<a href={`${blockchainExplorerURL}address/${account}`} target="_blank" rel="noreferrer" className="button">View My Etherscan</a>
 					</Col>
 				</Row>
 				<Row className="my-2 text-center">
@@ -207,8 +216,35 @@ function App() {
 					)}
 				</Row>
 			</main>
+			<Footer />
 		</div>
 	)
 }
 
 export default App;
+
+
+// TODO:
+// QA all links
+// host on our domain
+//
+// MINT:
+// add footer (with all logos)
+// add alerts (minting..., already maxed out, etc.)
+// css styling update
+// update smart contract details that are displayed on the page (e.g. minting price, nft count)
+// add all metackicks to the ipfs (and update project / site accordingly) 
+//
+// HOME:
+// add helpful links: https://wallet.polygon.technology/
+// add rounded gifs
+// add testimonial vid
+//
+// RAFFLE:
+//
+// NICE TO HAVE:
+// fix countdown timer
+// add delayed reveal feature
+// separate main contract file out into multiple simpler contracts
+//
+

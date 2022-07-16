@@ -76,6 +76,11 @@ a, a:hover {
     color: var(--clr-malibu);
 }
 
+.a-footer {
+    font-weight: 250;
+    font-size: 1rem;
+}
+
 .contract-link {
     text-decoration: none;
     font-weight: 700;
