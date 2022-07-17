@@ -1416,7 +1416,7 @@ contract OpenEmoji is ERC721Enumerable, Ownable {
     string baseURI;
     string public baseExtension = ".json";
     uint256 public cost = 0 ether;
-    uint256 public maxSupply = 4;
+    uint256 public maxSupply = 12;
     uint256 public maxMintAmount = 5;
     uint256 public timeDeployed;
     uint256 public allowMintingAfter = 0;
