@@ -191,3 +191,16 @@ a, a:hover {
 
     border: .75em solid var(--clr-orient);
 }
+
+/* HOMEPAGE COMPONENT STYLES */
+.instruction-tagline {
+    color: var(--clr-orient);
+}
+
+.instruction-title {
+    color: var(--clr-malibu);
+}
+
+.instruction-description {
+    color: var(--clr-malibu);
+}

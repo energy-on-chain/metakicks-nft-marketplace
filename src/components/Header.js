@@ -12,7 +12,7 @@ const Header = (props) => {
             </a>
             <div className="ms-auto">
                 <a className="navbar-brand" href = "/">Home</a>
-                <a className="navbar-brand" href = "/">Mint</a>
+                <a className="navbar-brand" href = "/mint">Mint</a>
             </div>
             {props.account ? (
                 <a
