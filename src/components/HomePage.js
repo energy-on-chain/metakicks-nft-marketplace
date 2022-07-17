@@ -3,14 +3,12 @@ import { Row, Col } from 'react-bootstrap';
 import ReactPlayer from "react-player";
 
 // Import App Components
-import Header from "./Header";
 import Footer from "./Footer";
 
 
 function HomePage() {
   return (
       <div>
-        <Header/>
         <main>
             <Row className="my-3">
                 <Col className="text-center">

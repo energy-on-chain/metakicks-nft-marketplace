@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './components/App.css';
 
 // Import App Components
-// import App from './components/App';
 import HomePage from './components/HomePage';
 import MintPage from './components/MintPage';
 
@@ -16,11 +15,12 @@ import MintPage from './components/MintPage';
 import * as serviceWorker from './serviceWorker';
 
 
+// LAYOUT
 ReactDOM.render(
-        <BrowserRouter>
+    <BrowserRouter>
         <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/mint" element={<MintPage />} />
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/mint" element={<MintPage/>} />
         </Routes>
     </BrowserRouter>,
     document.getElementById('root')

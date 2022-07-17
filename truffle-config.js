@@ -24,8 +24,8 @@ module.exports = {
 		mumbai: {
 			provider: function () {
 				return new HDWalletProvider(
-					[process.env.DEPLOYER_PRIVATE_KEY],
-					`wss://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_MUMBAI_API_KEY}` // URL to Polygon Mumbai Node
+					[process.env.REACT_APP_DEPLOYER_PRIVATE_KEY],
+					`wss://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_MUMBAI_API_KEY}` // URL to Polygon Mumbai Node
 				)
 			},
 			network_id: 80001
