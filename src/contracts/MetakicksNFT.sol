@@ -25,7 +25,7 @@ contract MetakicksNFT is ERC721Enumerable, Ownable {
   string public baseExtension = ".json";
   uint256 public cost = 0.0 ether;
   uint256 public maxSupply = 4;
-  uint256 public maxMintAmount = 4;
+  uint256 public maxMintAmount = 5;
   bool public paused = false;
 //   mapping(address => bool) public whitelisted;
 
@@ -35,7 +35,7 @@ contract MetakicksNFT is ERC721Enumerable, Ownable {
     string memory _initBaseURI
   ) ERC721(_name, _symbol) {
     setBaseURI(_initBaseURI);
-    mint(msg.sender, 1);
+    // mint(msg.sender, 1);    FIXME: no initial mint
   }
 
   // internal

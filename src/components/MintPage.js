@@ -31,11 +31,11 @@ function MintPage() {
 	const [account, setAccount] = useState(null)
 	const [supplyAvailable, setSupplyAvailable] = useState(0)
 	const [balanceOf, setBalanceOf] = useState(0)
+	const [maxMintAmount, setMaxMintAmount] = useState(999)
 	const [blockchainExplorerURL, setBlockchainExplorerURL] = useState('https://etherscan.io/')
 	const [openseaURL, setOpenseaURL] = useState('https://opensea.io/')
 	const [message, setMessage] = useState(null)
 	const [currentNetwork, setCurrentNetwork] = useState(null)
-	const [currentTime, setCurrentTime] = useState(new Date().getTime())
 	// const [showAlert, setShowAlert] = useState('')
 
 
@@ -49,21 +49,25 @@ function MintPage() {
 			setCurrentNetwork(networkId)
 
 			try {
+				// instantiate contract
 				const metakicksNft = new web3.eth.Contract(MetakicksNFT.abi, MetakicksNFT.networks[networkId].address) 
 				setMetakicksNft(metakicksNft)
 
 				const maxSupply = await metakicksNft.methods.maxSupply().call()
+				console.log('maxSupply: ', maxSupply)
 				const totalSupply = await metakicksNft.methods.totalSupply().call()
+				console.log('totalSupply: ', totalSupply)    // inherited from... (?)
 				setSupplyAvailable(maxSupply - totalSupply)
+				console.log('supplyAvailable: ', supplyAvailable)
+
+				const limitPerUser = await metakicksNft.methods.maxMintAmount().call()
+				setMaxMintAmount(limitPerUser)
 
 				const balanceOf = await metakicksNft.methods.balanceOf(account).call()
 				setBalanceOf(balanceOf)
+				console.log('balanceOf the loaded account: ', balanceOf)
 
-				// const allowMintingAfter = await metakicksNft.methods.allowMintingAfter().call()
-				// const timeDeployed = await metakicksNft.methods.timeDeployed().call()
-				// setRevealTime((Number(timeDeployed) + Number(allowMintingAfter)).toString() + '000')
-
-				if (networkId !== 5777) {
+				if (networkId !== 5777) {    // if not local network, set URLs appropriately
 					setBlockchainExplorerURL(CONFIG.NETWORKS[networkId].blockchainExplorerURL)
 					setOpenseaURL(CONFIG.NETWORKS[networkId].openseaURL)
 				}
@@ -71,7 +75,7 @@ function MintPage() {
 			} catch (error) {
 				console.log(error)
 				setIsError(true)
-				setMessage("Contract not deployed to current network, please change network to Polygon in MetaMask")
+				setMessage("Contract not deployed to current network, please change network to Polygon Testnet (Mumbai) in MetaMask")
 			}
 
 		}
@@ -114,27 +118,31 @@ function MintPage() {
 
 	const mintNFTHandler = async () => {
 		console.log("Running mintNFTHandler...")
-		// if (revealTime > new Date().getTime()) {
-		// 	window.alert('Minting is not live yet!')  
-		// 	return
-		// }
+		const totalSupply = await metakicksNft.methods.totalSupply().call()
+		const maxSupply = await metakicksNft.methods.maxSupply().call()
 
-		// if (balanceOf > 5) {
-		// 	window.alert('You have already minted the max amount!');
-		// 	// setShowAlert("minting")
-		// 	return 
-		// }
+		if (balanceOf > maxMintAmount) {
+			window.alert(`You have already minted the max amount per person! (${maxMintAmount})`);
+			return 
+		}
+
+		if (totalSupply >= maxSupply) {
+			window.alert(`The full collection has already been minted! (${maxSupply})`);
+			return
+		}
 
 		// Mint NFT
 		if (metakicksNft) {
 			console.log('minting...')
+			window.alert('Minting... please refresh page once transaction is confirmed in Metamask.')
+			
 			setIsMinting(true)
 			setIsError(false)
 
 			await metakicksNft.methods.mint(account, 1).send({ from: account, value: 0 })
 				.on('confirmation', async () => {
 					console.log('confirmation received...')
-					window.alert('Success! Please refresh the page.')
+					window.alert('Success!')
 					const maxSupply = await metakicksNft.methods.maxSupply().call()
 					const totalSupply = await metakicksNft.methods.totalSupply().call()
 					setSupplyAvailable(maxSupply - totalSupply)
@@ -195,9 +203,6 @@ function MintPage() {
 				<Row className="my-3">
                  	<Col className="flex">
                     	<a href={openseaURL + account} target="_blank" rel="noreferrer" className="button">View On Opensea</a>
-						<span>     </span>
-                    	<a href='https://testnet.rarible.com/' target="_blank" rel="noreferrer" className="button">View On Rarible</a>
-                    	<span>     </span>
 						<a href={`${blockchainExplorerURL}address/${account}`} target="_blank" rel="noreferrer" className="button">View My Etherscan</a>
                  	</Col>
              	</Row>
@@ -217,7 +222,7 @@ function MintPage() {
                         	{CONFIG.NETWORKS[currentNetwork] && (
                             	<p>Current Network: {CONFIG.NETWORKS[currentNetwork].name}</p>
                         	)}
-                        	<p>{`NFT's Left: ${supplyAvailable}, You've minted: ${balanceOf}`}</p>
+                        	<p>{`Metakicks Remaining: ${supplyAvailable}, You've minted: ${balanceOf}`}</p>
                     	</div>
                 	)}
             	</Row>
