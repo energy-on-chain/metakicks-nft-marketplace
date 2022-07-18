@@ -131,7 +131,7 @@ function MintPage() {
 			setIsMinting(true)
 			setIsError(false)
 
-			await metakicksNft.methods.mint(1).send({ from: account, value: 0 })
+			await metakicksNft.methods.mint(account, 1).send({ from: account, value: 0 })
 				.on('confirmation', async () => {
 					console.log('confirmation received...')
 					window.alert('Success! Please refresh the page.')
@@ -195,8 +195,10 @@ function MintPage() {
 				<Row className="my-3">
                  	<Col className="flex">
                     	<a href={openseaURL + account} target="_blank" rel="noreferrer" className="button">View On Opensea</a>
+						<span>     </span>
                     	<a href='https://testnet.rarible.com/' target="_blank" rel="noreferrer" className="button">View On Rarible</a>
-                    	<a href={`${blockchainExplorerURL}address/${account}`} target="_blank" rel="noreferrer" className="button">View My Etherscan</a>
+                    	<span>     </span>
+						<a href={`${blockchainExplorerURL}address/${account}`} target="_blank" rel="noreferrer" className="button">View My Etherscan</a>
                  	</Col>
              	</Row>
 				<Row className="my-2 text-center">
