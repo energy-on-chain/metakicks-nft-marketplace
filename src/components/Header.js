@@ -7,12 +7,12 @@ const Header = (props) => {
                 rel="noopener noreferrer"
             >
                 {/* <img src={logo} className="App-logo" alt="logo" /> */}
-                Metakicks NFT
+                Metakicks NFT Homepage
             </a>
-            <div className="ms-auto">
+            {/* <div className="ms-auto">
                 <a className="navbar-brand" href = "/">Home</a>
                 <a className="navbar-brand" href = "/mint">Mint</a>
-            </div>
+            </div> */}
             {props.account ? (
                 <a
                     href={`https://etherscan.io/address/${props.account}`}
