@@ -202,7 +202,8 @@ function MintPage() {
 				</Row>
 				<Row className="my-3">
                  	<Col className="flex">
-                    	<a href={openseaURL + account} target="_blank" rel="noreferrer" className="button">View On Opensea</a>
+                    	{/* <a href={openseaURL + account} target="_blank" rel="noreferrer" className="button">View On Opensea</a> */}
+                    	<a href="https://testnet.rarible.com/" target="_blank" rel="noreferrer" className="button">View On Rarible</a>
 						<a href={`${blockchainExplorerURL}address/${account}`} target="_blank" rel="noreferrer" className="button">View My Etherscan</a>
                  	</Col>
              	</Row>
