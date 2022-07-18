@@ -26,6 +26,9 @@ module.exports = {
 				return new HDWalletProvider(
 					[process.env.REACT_APP_DEPLOYER_PRIVATE_KEY],
 					`wss://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_MUMBAI_API_KEY}` // URL to Polygon Mumbai Node
+					// `wss://sparkling-holy-forest.matic-testnet.discover.quiknode.pro/${process.env.REACT_APP_QUICK_NODE_API_KEY}/` // URL to Polygon Mumbai Node via Quicknode
+					// `https://sparkling-holy-forest.matic-testnet.discover.quiknode.pro/64c0e8b0bf72e8da9dabc50889b2638125b84032/`
+					// "wss://sparkling-holy-forest.matic-testnet.discover.quiknode.pro/64c0e8b0bf72e8da9dabc50889b2638125b84032"
 				)
 			},
 			network_id: 80001

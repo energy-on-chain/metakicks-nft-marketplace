@@ -49,7 +49,7 @@ function MintPage() {
 			setCurrentNetwork(networkId)
 
 			try {
-				const metakicksNft = new web3.eth.Contract(MetakicksNFT.abi, MetakicksNFT.networks[networkId].address)
+				const metakicksNft = new web3.eth.Contract(MetakicksNFT.abi, MetakicksNFT.networks[networkId].address) 
 				setMetakicksNft(metakicksNft)
 
 				const maxSupply = await metakicksNft.methods.maxSupply().call()
@@ -59,9 +59,9 @@ function MintPage() {
 				const balanceOf = await metakicksNft.methods.balanceOf(account).call()
 				setBalanceOf(balanceOf)
 
-				const allowMintingAfter = await metakicksNft.methods.allowMintingAfter().call()
-				const timeDeployed = await metakicksNft.methods.timeDeployed().call()
-				setRevealTime((Number(timeDeployed) + Number(allowMintingAfter)).toString() + '000')
+				// const allowMintingAfter = await metakicksNft.methods.allowMintingAfter().call()
+				// const timeDeployed = await metakicksNft.methods.timeDeployed().call()
+				// setRevealTime((Number(timeDeployed) + Number(allowMintingAfter)).toString() + '000')
 
 				if (networkId !== 5777) {
 					setBlockchainExplorerURL(CONFIG.NETWORKS[networkId].blockchainExplorerURL)
@@ -69,6 +69,7 @@ function MintPage() {
 				}
 
 			} catch (error) {
+				console.log(error)
 				setIsError(true)
 				setMessage("Contract not deployed to current network, please change network to Polygon in MetaMask")
 			}
@@ -113,16 +114,16 @@ function MintPage() {
 
 	const mintNFTHandler = async () => {
 		console.log("Running mintNFTHandler...")
-		if (revealTime > new Date().getTime()) {
-			window.alert('Minting is not live yet!')  
-			return
-		}
+		// if (revealTime > new Date().getTime()) {
+		// 	window.alert('Minting is not live yet!')  
+		// 	return
+		// }
 
-		if (balanceOf > 5) {
-			window.alert('You have already minted the max amount!');
-			// setShowAlert("minting")
-			return 
-		}
+		// if (balanceOf > 5) {
+		// 	window.alert('You have already minted the max amount!');
+		// 	// setShowAlert("minting")
+		// 	return 
+		// }
 
 		// Mint NFT
 		if (metakicksNft) {
