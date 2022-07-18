@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "An Ethereum Marketplace",
   "author": "gregory@dappuniversity.com",
+  "homepage": "./",
   "dependencies": {
     "@openzeppelin/contracts": "^4.3.2",
     "@testing-library/jest-dom": "^5.14.1",
