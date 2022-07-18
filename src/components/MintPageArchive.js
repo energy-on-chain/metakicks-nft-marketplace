@@ -12,7 +12,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 // Import ABI + Config
-import MetakicksNFT from '../abis/MetakicksNFT.json';
+import OpenEmoji from '../abis/OpenEmoji.json';
 import CONFIG from '../config.json';
 // import { NODE_PARENT_VALIDATIONS } from '@babel/types';
 
@@ -23,7 +23,7 @@ import metakickImage from '../images/metakick0.PNG'
 function MintPage() {
 
 	// STATE VARIABLES
-	const [metakicksNft, setMetakicksNft] = useState(null)
+	const [openEmoji, setOpenEmoji] = useState(null)
 	const [revealTime, setRevealTime] = useState(0)
 	const [isMinting, setIsMinting] = useState(false)
 	const [isError, setIsError] = useState(false)
@@ -49,18 +49,18 @@ function MintPage() {
 			setCurrentNetwork(networkId)
 
 			try {
-				const metakicksNft = new web3.eth.Contract(MetakicksNFT.abi, MetakicksNFT.networks[networkId].address)
-				setMetakicksNft(metakicksNft)
+				const openEmoji = new web3.eth.Contract(OpenEmoji.abi, OpenEmoji.networks[networkId].address)
+				setOpenEmoji(openEmoji)
 
-				const maxSupply = await metakicksNft.methods.maxSupply().call()
-				const totalSupply = await metakicksNft.methods.totalSupply().call()
+				const maxSupply = await openEmoji.methods.maxSupply().call()
+				const totalSupply = await openEmoji.methods.totalSupply().call()
 				setSupplyAvailable(maxSupply - totalSupply)
 
-				const balanceOf = await metakicksNft.methods.balanceOf(account).call()
+				const balanceOf = await openEmoji.methods.balanceOf(account).call()
 				setBalanceOf(balanceOf)
 
-				const allowMintingAfter = await metakicksNft.methods.allowMintingAfter().call()
-				const timeDeployed = await metakicksNft.methods.timeDeployed().call()
+				const allowMintingAfter = await openEmoji.methods.allowMintingAfter().call()
+				const timeDeployed = await openEmoji.methods.timeDeployed().call()
 				setRevealTime((Number(timeDeployed) + Number(allowMintingAfter)).toString() + '000')
 
 				if (networkId !== 5777) {
@@ -125,20 +125,20 @@ function MintPage() {
 		}
 
 		// Mint NFT
-		if (metakicksNft) {
+		if (openEmoji) {
 			console.log('minting...')
 			setIsMinting(true)
 			setIsError(false)
 
-			await metakicksNft.methods.mint(1).send({ from: account, value: 0 })
+			await openEmoji.methods.mint(1).send({ from: account, value: 0 })
 				.on('confirmation', async () => {
 					console.log('confirmation received...')
 					window.alert('Success! Please refresh the page.')
-					const maxSupply = await metakicksNft.methods.maxSupply().call()
-					const totalSupply = await metakicksNft.methods.totalSupply().call()
+					const maxSupply = await openEmoji.methods.maxSupply().call()
+					const totalSupply = await openEmoji.methods.totalSupply().call()
 					setSupplyAvailable(maxSupply - totalSupply)
 
-					const balanceOf = await metakicksNft.methods.balanceOf(account).call()
+					const balanceOf = await openEmoji.methods.balanceOf(account).call()
 					setBalanceOf(balanceOf)
 				})
 				.on('error', (error) => {
@@ -186,15 +186,14 @@ function MintPage() {
 							) : (
 								metakickImage
 							)}
-							alt="image-text-placeholder"
+							alt="emoji-smile"
 							className="image-showcase-example-1"
 						/>
 					</Col>
 				</Row>
 				<Row className="my-3">
                  	<Col className="flex">
-                    	<a href={openseaURL + account} target="_blank" rel="noreferrer" className="button">View On Opensea</a>
-                    	<a href='https://testnet.rarible.com/' target="_blank" rel="noreferrer" className="button">View On Rarible</a>
+                    	<a href={openseaURL + account} target="_blank" rel="noreferrer" className="button">View My Opensea</a>
                     	<a href={`${blockchainExplorerURL}address/${account}`} target="_blank" rel="noreferrer" className="button">View My Etherscan</a>
                  	</Col>
              	</Row>
@@ -203,12 +202,12 @@ function MintPage() {
                     	<p>{message}</p>
                 		) : (
                     	<div>
-                        	{metakicksNft &&
-                            	<a href={`${blockchainExplorerURL}address/${metakicksNft._address}`}
+                        	{openEmoji &&
+                            	<a href={`${blockchainExplorerURL}address/${openEmoji._address}`}
                                 	target="_blank"
                                 	rel="noreferrer"
                                 	className="contract-link d-block my-3">
-                                	{metakicksNft._address}
+                                	{openEmoji._address}
                             	</a>
                         	}
                         	{CONFIG.NETWORKS[currentNetwork] && (
