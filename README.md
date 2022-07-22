@@ -5,7 +5,7 @@ Metakicks is a shoe-focused NFT art project completed for a client as a proof-of
 
 Click here to visit while the site is still under construction -> https://metakicks-nft-marketplace.vercel.app/
 
-![alt text](https://github.com/energy-on-chain/offline-backtesting-tool/blob/main/metakicks-screenshot.png?raw=true)
+![alt text](https://github.com/energy-on-chain/metakicks-nft-marketplace/blob/main/metakicks-screenshot.png?raw=true)
 
 ## [ STACK ]
 - Solidity (smart contracts)
